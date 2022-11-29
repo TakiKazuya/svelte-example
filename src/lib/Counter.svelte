@@ -6,6 +6,6 @@
 </script>
 
 <button on:click={increment}>
-  count is {count}.
+  count is {count}. <br>
   カウントは {count} です。
 </button>
