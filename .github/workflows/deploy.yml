@@ -1,1 +1,20 @@
+name: s3-deploy
+on:
+  push:
+    branches:
+      - master
 
+jobs:
+  UploadStaticFiles:
+    name: Upload static files
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_DEV_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_DEV_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-1
+      - name: S3 sync
+        working-directory: static-files
+        run: aws s3 sync . s3://taki-tech-example --delete --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers --exclude "README.md"
