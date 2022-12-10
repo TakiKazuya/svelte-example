@@ -7,5 +7,4 @@
 
 <button on:click={increment}>
   count is {count}. <br>
-  カウントは {count} です。
 </button>
